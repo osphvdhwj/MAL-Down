@@ -6,37 +6,89 @@ plugins {
 
 android {
     namespace "com.maldown.app"
-    compileSdkVersion 34
+    compileSdk 35  // Updated to Android 15 (latest)
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
 
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '17'
     }
 
     defaultConfig {
         applicationId "com.maldown.app"
-        minSdkVersion 23
-        targetSdkVersion 33
-        versionCode 1
-        versionName "1.0.0"
+        minSdk 23  // Android 6.0 minimum
+        targetSdk 35  // Android 15 target
+        versionCode 2
+        versionName "2.0.0"
         multiDexEnabled true
+        
+        // Keep only needed resources to reduce APK size
+        resConfigs "en", "xxhdpi", "xxxhdpi"
+        
+        // NDK ABI filters for optimization
+        ndk {
+            abiFilters 'arm64-v8a', 'armeabi-v7a'
+        }
+    }
+
+    // ABI splitting for smaller APKs
+    splits {
+        abi {
+            enable true
+            reset()
+            include 'arm64-v8a', 'armeabi-v7a'
+            universalApk false
+        }
     }
 
     buildTypes {
         release {
+            // Enable code shrinking and resource shrinking
             minifyEnabled true
             shrinkResources true
+            
+            // Proguard configuration
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            
+            // Signing config (configure in gradle.properties)
+            signingConfig signingConfigs.debug  // Change to release when ready
         }
+        
+        debug {
+            minifyEnabled false
+            shrinkResources false
+        }
+    }
+    
+    // Packaging options
+    packagingOptions {
+        resources {
+            excludes += ['/META-INF/{AL2.0,LGPL2.1}']
+        }
+    }
+    
+    // Build features
+    buildFeatures {
+        buildConfig true
     }
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.0"
-    implementation 'androidx.work:work-runtime-ktx:2.9.0'
-    implementation 'androidx.core:core-ktx:1.12.0'
+    // Kotlin standard library
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.1.0"
+    
+    // AndroidX Core
+    implementation 'androidx.core:core-ktx:1.15.0'
+    
+    // WorkManager for background tasks
+    implementation 'androidx.work:work-runtime-ktx:2.10.0'
+    
+    // MultiDex support
+    implementation 'androidx.multidex:multidex:2.0.1'
+    
+    // ExifInterface for metadata
+    implementation 'androidx.exifinterface:exifinterface:1.3.7'
 }
