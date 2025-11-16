@@ -26,11 +26,10 @@ jobs:
       with:
         flutter-version: "3.24.0"
 
-    - name: Verify Dart SDK Version
-      run: dart --version
-
-    - name: Flutter Doctor
-      run: flutter doctor -v
+    - name: Check Flutter & Dart
+      run: |
+        flutter --version
+        dart --version
 
     - name: Install dependencies
       run: flutter pub get
@@ -61,3 +60,4 @@ jobs:
         name: MAL Down Release v1.0.9
         body: |
           Auto-generated release from GitHub Actions workflow.
+          
