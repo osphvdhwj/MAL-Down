@@ -93,12 +93,13 @@ flutter:
   assets:
     - assets/images/
     - assets/images/icons/
-  
-  fonts:
-    - family: Roboto
-      fonts:
-        - asset: assets/fonts/Roboto/Roboto-Regular.ttf
-        - asset: assets/fonts/Roboto/Roboto-Bold.ttf
-          weight: 700
-        - asset: assets/fonts/Roboto/Roboto-Medium.ttf
-          weight: 500
+
+# Remove font assets to rely on Google Fonts package dynamically
+#  fonts:
+#    - family: Roboto
+#      fonts:
+#        - asset: assets/fonts/Roboto/Roboto-Regular.ttf
+#        - asset: assets/fonts/Roboto/Roboto-Bold.ttf
+#          weight: 700
+#        - asset: assets/fonts/Roboto/Roboto-Medium.ttf
+#          weight: 500
