@@ -1,0 +1,93 @@
+# Flutter/Dart
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+build/
+.buildlog/
+
+# Android
+*.iml
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.gradle
+local.properties
+.idea/
+*.ipr
+*.iws
+gradle-wrapper.jar
+gradle-wrapper.properties
+*.apk
+*.ap_
+*.dex
+output.json
+
+# iOS
+*.mode1v3
+*.mode2v3
+*.moved-aside
+*.pbxuser
+*.perspectivev3
+**/*sync/
+.sconsign.dblite
+.tags*
+**/.vagrant/
+**/DerivedData/
+Icon?
+**/Pods/
+**/.symlinks/
+profile
+xcuserdata
+**/.generated/
+Flutter/App.framework
+Flutter/Flutter.framework
+Flutter/Flutter.podspec
+Flutter/Generated.xcconfig
+Flutter/app.flx
+Flutter/app.zip
+Flutter/flutter_assets/
+Flutter/flutter_export_environment.sh
+ServiceDefinitions.json
+Runner/GeneratedPluginRegistrant.*
+
+# Web
+lib/generated_plugin_registrant.dart
+
+# IntelliJ
+*.iml
+.idea/
+.gradle/
+local.properties
+
+# VS Code
+.vscode/
+
+# Windows
+Thumbs.db
+
+# Key files (IMPORTANT: Never commit these!)
+*.jks
+*.keystore
+key.properties
+google-services.json
+firebase-adminsdk*.json
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Testing
+coverage/
+test/.test_coverage.dart
+
+# Temporary files
+*.swp
+*.swo
+*~
