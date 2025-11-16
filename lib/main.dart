@@ -65,9 +65,9 @@ class MALDownApp extends ConsumerWidget {
             letterSpacing: 0.15,
           ),
         ),
-        cardTheme: CardTheme(
+        cardTheme: const CardThemeData(
           elevation: 1,
-          margin: const EdgeInsets.all(8),
+          margin: EdgeInsets.all(8),
           clipBehavior: Clip.antiAlias,
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
@@ -126,11 +126,11 @@ class MALDownApp extends ConsumerWidget {
             color: Colors.white,
           ),
         ),
-        cardTheme: CardTheme(
+        cardTheme: const CardThemeData(
           elevation: 1,
-          margin: const EdgeInsets.all(8),
+          margin: EdgeInsets.all(8),
           clipBehavior: Clip.antiAlias,
-          color: const Color(0xFF121212),
+          color: Color(0xFF121212),
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
@@ -189,10 +189,10 @@ class HomeScreen extends StatelessWidget {
                     color: colorScheme.primaryContainer,
                     borderRadius: BorderRadius.circular(32),
                   ),
-                  child: Icon(
+                  child: const Icon(
                     Icons.download_rounded,
                     size: 80,
-                    color: colorScheme.onPrimaryContainer,
+                    color: Color(0xFF536DFE),
                   ),
                 ),
                 const SizedBox(height: 32),
