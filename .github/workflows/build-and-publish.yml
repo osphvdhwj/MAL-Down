@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    name: Build Perfect APK for Poco X5 Pro
+    name: Build and Publish APK
     runs-on: ubuntu-latest
 
     steps:
@@ -18,14 +18,14 @@ jobs:
     - name: Setup Java
       uses: actions/setup-java@v4
       with:
-        distribution: 'temurin'
-        java-version: '17'
+        distribution: temurin
+        java-version: 17
 
     - name: Setup Flutter
       uses: subosito/flutter-action@v2
       with:
-        flutter-version: '3.19.0'
-        channel: 'stable'
+        flutter-version: 3.22.0
+        channel: stable
 
     - name: Verify Dart SDK Version
       run: dart --version
@@ -33,54 +33,33 @@ jobs:
     - name: Flutter Doctor
       run: flutter doctor -v
 
-    - name: Install Dependencies
+    - name: Install dependencies
       run: flutter pub get
 
     - name: Pub Outdated
       run: flutter pub outdated || true
 
-    - name: Analyze Code
+    - name: Analyze
       run: flutter analyze
 
-    - name: Run Tests
-      run: flutter test || true
+    - name: Test
+      run: flutter test --coverage
 
-    - name: Build APK (ARM64 for Poco X5 Pro)
-      run: flutter build apk --release --target-platform android-arm64 --split-per-abi
+    - name: Build APK
+      run: flutter build apk --release --target-platform android-arm64
 
-    - name: Upload APK Artifact
+    - name: Upload APK
       uses: actions/upload-artifact@v4
       with:
-        name: mal-down-apk-arm64
+        name: Release APK
         path: build/app/outputs/flutter-apk/app-arm64-v8a-release.apk
-        retention-days: 30
 
-    - name: Create GitHub Release
+    - name: Publish to GitHub Releases
       uses: ncipollo/release-action@v1
-      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       with:
         artifacts: build/app/outputs/flutter-apk/app-arm64-v8a-release.apk
-        tag: v1.0.3-${{ github.sha }}
-        name: MAL Down v1.0.3 (ARM64)
+        tag: v1.0.9
+        name: MAL Down Release v1.0.9
         body: |
-          ## MAL Down Release v1.0.3
+          Auto-generated release from GitHub Actions workflow.
           
-          **Optimized for Poco X5 Pro (ARM64)**
-          
-          ### Changes:
-          - Fixed Dart SDK compatibility (3.8.0+)
-          - Updated all dependencies to latest versions
-          - Fixed Android embedding v2 migration
-          - Updated flutter-action to v2
-          - Using Flutter 3.19.0 with Dart 3.8.0+
-          - ARM64 optimized build for Snapdragon 778G
-          
-          ### Build Info:
-          - Commit: ${{ github.sha }}
-          - Build Date: ${{ github.event.head_commit.timestamp }}
-          - Target: ARM64 (Poco X5 Pro)
-          
-          ### Installation:
-          Download `app-arm64-v8a-release.apk` and install on your device.
-        allowUpdates: true
-        makeLatest: true
