@@ -1,0 +1,57 @@
+name: Build APK and Publish
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    name: Build and Publish APK
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    - name: Setup Java
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin'
+        java-version: '11'
+
+    - name: Setup Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.16.0'
+        channel: 'stable'
+
+    - name: Install Dependencies
+      run: flutter pub get
+
+    - name: Run Lint
+      run: flutter analyze
+
+    - name: Run Tests
+      run: flutter test --coverage
+
+    - name: Build APK
+      run: flutter build apk --release --target-platform android-arm64
+
+    - name: Upload APK
+      uses: actions/upload-artifact@v3
+      with:
+        name: Release APK
+        path: build/app/outputs/flutter-apk/app-arm64-v8a-release.apk
+
+    - name: Publish to GitHub Releases
+      uses: ncipollo/release-action@v1
+      with:
+        artifacts: build/app/outputs/flutter-apk/app-arm64-v8a-release.apk
+        tag: v1.0.0
+        name: MAL Down Release v1.0.0
+        body: |
+          Auto-generated release from GitHub Actions workflow.
+
+
