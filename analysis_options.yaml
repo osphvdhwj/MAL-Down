@@ -2,13 +2,13 @@ include: package:flutter_lints/flutter.yaml
 
 linter:
   rules:
-    # Recommended 2025 rules - Const optimization
+    # Const optimization
     - prefer_const_constructors
     - prefer_const_declarations
     - prefer_const_literals_to_create_immutables
     - prefer_final_fields
     - prefer_final_locals
-    
+
     # Code quality
     - unnecessary_this
     - avoid_print
@@ -53,12 +53,9 @@ linter:
     - use_function_type_syntax_for_parameters
     - use_rethrow_when_possible
     - valid_regexps
-    
-    # Additional best practices
-    - always_put_control_body_on_new_line
+
+    # Additional rules (compatible with Dart 3.5)
     - avoid_bool_literals_in_conditional_expressions
-    - avoid_catches_without_on_clauses
-    - avoid_catching_errors
     - avoid_double_and_int_checks
     - avoid_equals_and_hash_code_on_mutable_classes
     - avoid_field_initializers_in_const_classes
@@ -68,7 +65,6 @@ linter:
     - avoid_multiple_declarations_per_line
     - avoid_positional_boolean_parameters
     - avoid_private_typedef_functions
-    - avoid_redundant_argument_values
     - avoid_renaming_method_parameters
     - avoid_returning_null_for_void
     - avoid_setters_without_getters
@@ -96,7 +92,6 @@ linter:
     - iterable_contains_unrelated_type
     - leading_newlines_in_multiline_strings
     - library_private_types_in_public_api
-    - lines_longer_than_80_chars
     - list_remove_unrelated_type
     - literal_only_boolean_expressions
     - missing_whitespace_between_adjacent_strings
@@ -109,14 +104,12 @@ linter:
     - noop_primitive_operations
     - null_check_on_nullable_type_parameter
     - overridden_fields
-    - package_api_docs
     - package_names
     - package_prefixed_library_names
     - parameter_assignments
     - prefer_asserts_in_initializer_lists
     - prefer_asserts_with_message
     - prefer_constructors_over_static_methods
-    - prefer_expression_function_bodies
     - prefer_foreach
     - prefer_function_declarations_over_variables
     - prefer_initializing_formals
@@ -130,7 +123,6 @@ linter:
     - secure_pubspec_urls
     - sort_child_properties_last
     - sort_constructors_first
-    - sort_pub_dependencies
     - sort_unnamed_constructors_first
     - test_types_in_equals
     - throw_in_finally

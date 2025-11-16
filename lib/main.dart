@@ -3,15 +3,15 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
+
   // Set preferred orientations
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
-  
+
   // Set system UI overlay style for edge-to-edge
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
@@ -20,12 +20,12 @@ void main() async {
       systemNavigationBarDividerColor: Colors.transparent,
     ),
   );
-  
+
   // Enable edge-to-edge mode
-  SystemChrome.setEnabledSystemUIMode(
+  await SystemChrome.setEnabledSystemUIMode(
     SystemUiMode.edgeToEdge,
   );
-  
+
   runApp(
     const ProviderScope(
       child: MALDownApp(),
@@ -37,25 +37,23 @@ class MALDownApp extends ConsumerWidget {
   const MALDownApp({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return MaterialApp(
-      title: 'MAL Down',
-      debugShowCheckedModeBanner: false,
-      
-      // Material Design 3 Light Theme
-      theme: ThemeData(
+  Widget build(BuildContext context, WidgetRef ref) =>
+      MaterialApp(
+        title: 'MAL Down',
+        theme: _buildLightTheme(),
+        darkTheme: _buildDarkTheme(),
+        themeMode: ThemeMode.system,
+        home: const HomeScreen(),
+      );
+
+  ThemeData _buildLightTheme() => ThemeData(
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFF2E51A2), // MAL blue
-          brightness: Brightness.light,
+          seedColor: const Color(0xFF2E51A2),
         ).copyWith(
-          surfaceTint: Colors.transparent, // Remove tint for cleaner UI
+          surfaceTint: Colors.transparent,
         ),
-        
-        // Typography using Google Fonts (Roboto)
         textTheme: GoogleFonts.robotoTextTheme(),
-        
-        // AppBar theme with elevation
         appBarTheme: AppBarTheme(
           centerTitle: true,
           elevation: 0,
@@ -67,15 +65,11 @@ class MALDownApp extends ConsumerWidget {
             letterSpacing: 0.15,
           ),
         ),
-        
-        // Card theme
-        cardTheme: const CardTheme(
+        cardTheme: CardTheme(
           elevation: 1,
-          margin: EdgeInsets.all(8),
+          margin: const EdgeInsets.all(8),
           clipBehavior: Clip.antiAlias,
         ),
-        
-        // Elevated button theme
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             elevation: 1,
@@ -88,8 +82,6 @@ class MALDownApp extends ConsumerWidget {
             ),
           ),
         ),
-        
-        // Input decoration theme
         inputDecorationTheme: InputDecorationTheme(
           filled: true,
           border: OutlineInputBorder(
@@ -100,33 +92,27 @@ class MALDownApp extends ConsumerWidget {
             vertical: 16,
           ),
         ),
-        
-        // List tile theme
         listTileTheme: const ListTileThemeData(
           contentPadding: EdgeInsets.symmetric(
             horizontal: 16,
             vertical: 8,
           ),
         ),
-      ),
-      
-      // Material Design 3 Dark Theme (True Black for AMOLED)
-      darkTheme: ThemeData(
+      );
+
+  ThemeData _buildDarkTheme() => ThemeData(
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(
           seedColor: const Color(0xFF2E51A2),
           brightness: Brightness.dark,
         ).copyWith(
-          surface: Colors.black, // True black for AMOLED
+          surface: Colors.black,
           surfaceTint: Colors.transparent,
         ),
-        
         scaffoldBackgroundColor: Colors.black,
-        
         textTheme: GoogleFonts.robotoTextTheme(
           ThemeData.dark().textTheme,
         ),
-        
         appBarTheme: AppBarTheme(
           centerTitle: true,
           elevation: 0,
@@ -140,14 +126,12 @@ class MALDownApp extends ConsumerWidget {
             color: Colors.white,
           ),
         ),
-        
-        cardTheme: const CardTheme(
+        cardTheme: CardTheme(
           elevation: 1,
-          margin: EdgeInsets.all(8),
+          margin: const EdgeInsets.all(8),
           clipBehavior: Clip.antiAlias,
-          color: Color(0xFF121212),
+          color: const Color(0xFF121212),
         ),
-        
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             elevation: 1,
@@ -160,7 +144,6 @@ class MALDownApp extends ConsumerWidget {
             ),
           ),
         ),
-        
         inputDecorationTheme: InputDecorationTheme(
           filled: true,
           fillColor: const Color(0xFF121212),
@@ -172,19 +155,13 @@ class MALDownApp extends ConsumerWidget {
             vertical: 16,
           ),
         ),
-        
         listTileTheme: const ListTileThemeData(
           contentPadding: EdgeInsets.symmetric(
             horizontal: 16,
             vertical: 8,
           ),
         ),
-      ),
-      
-      themeMode: ThemeMode.system,
-      home: const HomeScreen(),
-    );
-  }
+      );
 }
 
 class HomeScreen extends StatelessWidget {
@@ -194,7 +171,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
-    
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('MAL Down'),
@@ -206,7 +183,6 @@ class HomeScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // App Icon
                 Container(
                   padding: const EdgeInsets.all(24),
                   decoration: BoxDecoration(
@@ -219,10 +195,7 @@ class HomeScreen extends StatelessWidget {
                     color: colorScheme.onPrimaryContainer,
                   ),
                 ),
-                
                 const SizedBox(height: 32),
-                
-                // Title
                 Text(
                   'MAL Down',
                   style: theme.textTheme.headlineLarge?.copyWith(
@@ -230,10 +203,7 @@ class HomeScreen extends StatelessWidget {
                     color: colorScheme.onSurface,
                   ),
                 ),
-                
                 const SizedBox(height: 16),
-                
-                // Subtitle
                 Text(
                   'MyAnimeList Image Downloader',
                   style: theme.textTheme.titleMedium?.copyWith(
@@ -241,27 +211,23 @@ class HomeScreen extends StatelessWidget {
                   ),
                   textAlign: TextAlign.center,
                 ),
-                
                 const SizedBox(height: 8),
-                
-                // Description
                 Text(
-                  'Download and organize your anime & manga images with metadata',
+                  'Download and organize your anime & '
+                  'manga images with metadata',
                   style: theme.textTheme.bodyMedium?.copyWith(
                     color: colorScheme.onSurfaceVariant,
                   ),
                   textAlign: TextAlign.center,
                 ),
-                
                 const SizedBox(height: 48),
-                
-                // Primary Action Button
                 FilledButton.icon(
                   onPressed: () {
-                    // TODO: Implement XML import
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        content: const Text('Import functionality coming soon!'),
+                        content: const Text(
+                          'Import functionality coming soon!',
+                        ),
                         behavior: SnackBarBehavior.floating,
                         action: SnackBarAction(
                           label: 'OK',
@@ -279,16 +245,13 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                
                 const SizedBox(height: 16),
-                
-                // Secondary Action Button
                 OutlinedButton.icon(
                   onPressed: () {
-                    // TODO: Implement settings
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
-                        content: Text('Settings functionality coming soon!'),
+                        content:
+                            Text('Settings functionality coming soon!'),
                         behavior: SnackBarBehavior.floating,
                       ),
                     );
@@ -302,10 +265,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                
                 const SizedBox(height: 48),
-                
-                // Features Card
                 Card(
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
@@ -314,7 +274,8 @@ class HomeScreen extends StatelessWidget {
                         _FeatureItem(
                           icon: Icons.cloud_download_outlined,
                           title: 'Smart Download',
-                          description: 'Automatic retry with exponential backoff',
+                          description:
+                              'Automatic retry with exponential backoff',
                           colorScheme: colorScheme,
                         ),
                         const Divider(height: 24),
@@ -340,12 +301,8 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ),
-      
-      // Floating Action Button
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          // TODO: Quick action
-        },
+        onPressed: () {},
         icon: const Icon(Icons.add_rounded),
         label: const Text('New Download'),
       ),
@@ -367,46 +324,44 @@ class _FeatureItem extends StatelessWidget {
   final ColorScheme colorScheme;
 
   @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Container(
-          padding: const EdgeInsets.all(8),
-          decoration: BoxDecoration(
-            color: colorScheme.secondaryContainer,
-            borderRadius: BorderRadius.circular(8),
+  Widget build(BuildContext context) => Row(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: colorScheme.secondaryContainer,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Icon(
+              icon,
+              color: colorScheme.onSecondaryContainer,
+              size: 24,
+            ),
           ),
-          child: Icon(
-            icon,
-            color: colorScheme.onSecondaryContainer,
-            size: 24,
-          ),
-        ),
-        const SizedBox(width: 16),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                title,
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  color: colorScheme.onSurface,
+          const SizedBox(width: 16),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                    color: colorScheme.onSurface,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 4),
-              Text(
-                description,
-                style: TextStyle(
-                  fontSize: 12,
-                  color: colorScheme.onSurfaceVariant,
+                const SizedBox(height: 4),
+                Text(
+                  description,
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: colorScheme.onSurfaceVariant,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-      ],
-    );
-  }
+        ],
+      );
 }
