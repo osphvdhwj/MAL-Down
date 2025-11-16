@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    name: Build and Publish APK
+    name: Pub Outdated, Upgrade and Build APK
     runs-on: ubuntu-latest
 
     steps:
@@ -27,13 +27,16 @@ jobs:
         flutter-version: '3.16.0'
         channel: 'stable'
 
-    - name: Install Dependencies
+    - name: Pub Outdated
+      run: flutter pub outdated || true
+
+    - name: Pub Upgrade
       run: flutter pub upgrade
 
-    - name: Run Lint
+    - name: Analyze
       run: flutter analyze
 
-    - name: Run Tests
+    - name: Test
       run: flutter test --coverage
 
     - name: Build APK
@@ -49,9 +52,7 @@ jobs:
       uses: ncipollo/release-action@v1
       with:
         artifacts: build/app/outputs/flutter-apk/app-arm64-v8a-release.apk
-        tag: v1.0.1
-        name: MAL Down Release v1.0.1
+        tag: v1.0.2
+        name: MAL Down Release v1.0.2
         body: |
-          Auto-generated release from GitHub Actions workflow.
-
-
+          This build runs `flutter pub outdated` and performs a full upgrade before building APK. Embedding v2 migration is enforced for all plugins including connectivity_plus.
