@@ -2,7 +2,12 @@ name: Flutter CI/CD
 
 on:
   push:
-    branches: [ main, feature/* ]
+    branches:
+      - main
+      - feature/2025-modernization
+      - feature/2025-modernizationt
+      - refs/heads/feature/2025-modernization
+      - refs/heads/feature/2025-modernizationt
   pull_request:
     branches: [ main ]
 
