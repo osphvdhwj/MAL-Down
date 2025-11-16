@@ -28,7 +28,7 @@ jobs:
         channel: 'stable'
 
     - name: Install Dependencies
-      run: flutter pub get
+      run: flutter pub upgrade
 
     - name: Run Lint
       run: flutter analyze
@@ -49,8 +49,8 @@ jobs:
       uses: ncipollo/release-action@v1
       with:
         artifacts: build/app/outputs/flutter-apk/app-arm64-v8a-release.apk
-        tag: v1.0.0
-        name: MAL Down Release v1.0.0
+        tag: v1.0.1
+        name: MAL Down Release v1.0.1
         body: |
           Auto-generated release from GitHub Actions workflow.
 
