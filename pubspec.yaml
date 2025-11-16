@@ -50,7 +50,7 @@ dev_dependencies:
   json_serializable: ^6.8.1
   hive_generator: ^2.1.0
   flutter_lints: ^6.0.0
-  mocktail: ^1.0.5
+  mocktail: ^1.0.6   # <-- UPDATED
   integration_test:
     sdk: flutter
 
@@ -67,3 +67,46 @@ flutter:
           weight: 700
         - asset: assets/fonts/Roboto/Roboto-Medium.ttf
           weight: 500
+
+include: package:flutter_lints/flutter.yaml
+
+linter:
+  rules:
+    - prefer_const_constructors
+    - prefer_const_literals_to_create_immutables
+    - avoid_print
+    - always_declare_return_types
+    - annotate_overrides
+    - await_only_futures
+    - camel_case_types
+    - cancel_subscriptions
+    - close_sinks
+    - comment_references
+    - constant_identifier_names
+    - control_flow_in_finally
+    - empty_statements
+    - hash_and_equals
+    - implementation_imports
+    - non_constant_identifier_names
+    - package_api_docs
+    - package_names
+    - package_prefixed_library_names
+    - prefer_final_fields
+    - prefer_final_locals
+    - prefer_is_empty
+    - prefer_is_not_empty
+    - slash_for_doc_comments
+    - sort_constructors_first
+    - sort_unnamed_constructors_first
+    - test_types_in_equals
+    - throw_in_finally
+    - type_init_formals
+    - unnecessary_brace_in_string_interps
+    - unnecessary_getters_setters
+    - unnecessary_null_aware_assignments
+    - unnecessary_null_in_if_null_operators
+    - unnecessary_statements
+    - unnecessary_this
+    - unrelated_type_equality_checks
+    - use_rethrow_when_possible
+    - valid_regexps
