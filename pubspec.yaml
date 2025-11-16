@@ -4,51 +4,51 @@ publish_to: 'none'
 version: 1.0.9+1
 
 environment:
-  sdk: ">=3.5.0 <4.0.0"
+  sdk: ">=3.8.0 <4.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
 
-  http: ^1.2.1
-  url_launcher: ^6.2.1
+  http: ^1.2.2
+  url_launcher: ^6.3.0
   shared_preferences: ^2.3.0
-  flutter_bloc: ^8.1.3
+  flutter_bloc: ^8.1.4
   equatable: ^2.0.8
 
   # Database + Local Storage
   sqflite: ^2.5.0
-  path_provider: ^2.5.0
-  hive: ^2.4.0
-  hive_flutter: ^1.2.0
+  path_provider: ^2.1.3
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
 
   # Networking + Utils
-  dio: ^5.6.0
-  connectivity_plus: ^5.1.0
-  xml: ^6.5.0
-  image: ^4.4.0
+  dio: ^5.7.0
+  connectivity_plus: ^6.0.2
+  xml: ^6.7.0
+  image: ^4.5.2
 
   # Cache + EXIF
-  cached_network_image: ^3.5.0
-  flutter_cache_manager: ^3.4.2
-  exif: ^3.4.0
-  native_exif: ^0.6.2
+  cached_network_image: ^3.5.1
+  flutter_cache_manager: ^3.4.3
+  exif: ^3.5.0
+  native_exif: ^0.6.3
 
   # File Picker + Permissions
-  file_picker: ^6.2.0
-  permission_handler: ^11.2.0
-  path: ^1.8.5
+  file_picker: ^8.0.3
+  permission_handler: ^11.3.1
+  path: ^1.9.0
 
   # Background Work + Notifications
   workmanager: ^0.5.3
-  flutter_local_notifications: ^18.0.1
+  flutter_local_notifications: ^18.0.0
 
   # Utils
   intl: ^0.19.1
-  uuid: ^4.2.2
-  json_annotation: ^4.9.1
-  dartz: ^0.11.0
-  logger: ^2.1.0
+  uuid: ^4.5.0
+  json_annotation: ^4.9.0
+  dartz: ^0.11.2
+  logger: ^2.2.0
 
   # UI
   cupertino_icons: ^1.0.8
@@ -56,30 +56,33 @@ dependencies:
   flutter_animate: ^4.6.0
 
   # Riverpod
-  flutter_riverpod: ^2.7.0
-  riverpod_annotation: ^2.5.0
+  flutter_riverpod: ^2.5.1
+  riverpod_annotation: ^2.5.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  build_runner: ^2.5.9
-  riverpod_generator: ^2.5.0
-  json_serializable: ^6.8.1
-  hive_generator: ^2.1.0
-  flutter_lints: ^6.0.0
+  build_runner: ^2.4.11
+  riverpod_generator: ^2.5.1
+  json_serializable: ^6.8.2
 
-  # LAST WORKING VERSION FOR DART 3.5.0
-  mocktail: ^1.0.0
+  # Correct version for Dart 3.8
+  hive_generator: ^2.0.1
+
+  flutter_lints: ^4.0.0
+  mocktail: ^1.0.3
 
   integration_test:
     sdk: flutter
 
 flutter:
   uses-material-design: true
+
   assets:
     - assets/images/
     - assets/images/icons/
+
   fonts:
     - family: Roboto
       fonts:
@@ -88,47 +91,3 @@ flutter:
           weight: 700
         - asset: assets/fonts/Roboto/Roboto-Medium.ttf
           weight: 500
-
-include: package:flutter_lints/flutter.yaml
-
-linter:
-  rules:
-    - prefer_const_constructors
-    - prefer_const_literals_to_create_immutables
-    - avoid_print
-    - always_declare_return_types
-    - annotate_overrides
-    - await_only_futures
-    - camel_case_types
-    - cancel_subscriptions
-    - close_sinks
-    - comment_references
-    - constant_identifier_names
-    - control_flow_in_finally
-    - empty_statements
-    - hash_and_equals
-    - implementation_imports
-    - non_constant_identifier_names
-    - package_api_docs
-    - package_names
-    - package_prefixed_library_names
-    - prefer_final_fields
-    - prefer_final_locals
-    - prefer_is_empty
-    - prefer_is_not_empty
-    - slash_for_doc_comments
-    - sort_constructors_first
-    - sort_unnamed_constructors_first
-    - test_types_in_equals
-    - throw_in_finally
-    - type_init_formals
-    - unnecessary_brace_in_string_interps
-    - unnecessary_getters_setters
-    - unnecessary_null_aware_assignments
-    - unnecessary_null_in_if_null_operators
-    - unnecessary_statements
-    - unnecessary_this
-    - unrelated_type_equality_checks
-    - use_rethrow_when_possible
-    - valid_regexps
-    
